@@ -19,7 +19,7 @@ app.MapGet("/", async () =>
         // LẤY SECRET TÊN "admin01"
         KeyVaultSecret secret = await client.GetSecretAsync("admin01");
 
-        return $"Điểm của asm 2: {secret.Value}";
+        return $"Bài làm thêm của Ngọc Bảo: {secret.Value}";
     }
     catch (Exception ex)
     {
@@ -28,3 +28,4 @@ app.MapGet("/", async () =>
 });
 
 app.Run();
+
