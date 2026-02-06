@@ -1,4 +1,4 @@
-using inventory.Models;
+// using inventory.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace inventory.Data
@@ -7,9 +7,10 @@ namespace inventory.Data
     {
         public BookContext(DbContextOptions<BookContext> options) : base(options) { }
 
-        public DbSet<Book> Books  {get; set;}  
+      //  public DbSet<Book> Books  {get; set;}  
         
     }    
 }
     
+
         
