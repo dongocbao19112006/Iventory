@@ -1,30 +1,26 @@
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
-using Microsoft.AspNetCore.Builder;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
-
-app.MapGet("/", async () =>
+namespace inventory
 {
-    // URL Key Vault của bạn
-    string keyVaultUrl = "https://asmnbaokey7.vault.azure.net/";
-
-    try 
+    public class Program
     {
-        // Tạo client kết nối Key Vault bằng Managed Identity (DefaultAzureCredential)
-        var client = new SecretClient(new Uri(keyVaultUrl), new DefaultAzureCredential());
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
 
-        // LẤY SECRET TÊN "admin01"
-        KeyVaultSecret secret = await client.GetSecretAsync("admin01");
-
-        return $"Điểm của asm 2: {secret.Value}";
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
     }
-    catch (Exception ex)
-    {
-        return $"Lỗi khi kết nối Key Vault: {ex.Message}";
-    }
-});
-
-app.Run();
+}
