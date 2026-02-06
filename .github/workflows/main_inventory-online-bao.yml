@@ -62,4 +62,5 @@ jobs:
           app-name: 'inventory-online-bao'
           slot-name: 'Production'
           package: .
+
           
